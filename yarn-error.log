@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\tarci\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add babel-plugin-modele-resolver -D
+  C:\Program Files\nodejs\node.exe C:\Users\tarci\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @expo-google-fonts/dn-sans
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-11.0.13.8-hotspot\bin;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\prio;c:\program files\dotnet\;c:\program files (x86)\dotnet\;c:\src\flutter\bin;c:\program files\git\cmd;c:\src\flutter;c:\program files\git\cmd\git.exe;c:\windows\system32\windowspowershell\v1.0;c:\program files\java\openjdk8\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenJDK\openjdk-8u312-b07\bin;C:\Program Files\nodejs\;C:\Users\tarci\AppData\Local\Android\Sdk\platform-tools;C:\Python27\Scripts;C:\Python27\;C:\Program Files\Git\cmd;C:\HashiCorp\Vagrant\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tarci\AppData\Local\Microsoft\WindowsApps;C:\Users\tarci\AppData\Local\Programs\Microsoft VS Code\bin;C:\src\flutter\bin;C:\src\flutter;C:\Users\tarci\AppData\Local\GitHubDesktop\bin;C:\Program Files\Java\openjdk;C:\Users\tarci\AppData\Roaming\npm
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/babel-plugin-modele-resolver: Not found
+  Error: https://registry.yarnpkg.com/@expo-google-fonts%2fdn-sans: Not found
       at Request.params.callback [as _callback] (C:\Users\tarci\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
       at Request.self.callback (C:\Users\tarci\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
       at Request.emit (events.js:400:28)
@@ -50,6 +50,7 @@ npm manifest:
       "@babel/core": "^7.12.9",
       "@types/react": "~17.0.21",
       "@types/react-native": "~0.67.6",
+      "babel-plugin-module-resolver": "^4.1.0",
       "typescript": "~4.3.5"
     },
     "private": true
