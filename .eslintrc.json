@@ -1,0 +1,78 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 13,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "react/style-prop-object": "off",
+        "react/self-closing-comp": [
+            "error",
+            {
+                "component": true,
+                "html": true
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "camelcase": "off",
+        "linebreak-style": 0,
+        "react/jsx-filename-extension": [
+            0
+        ],
+        "import/extensions": "off",
+        "no-console": "warn",
+        "indent": [
+            2,
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "comma-dangle": 1,
+        "import/no-duplicates": 1,
+        "import/default": 1,
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
+        ],
+        "padded-blocks": [
+            "error",
+            "never"
+        ],
+        "react/no-unused-prop-types": [
+            "error",
+            {
+                "skipShapeProps": true
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 80
+            }
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ]
+    }
+}
