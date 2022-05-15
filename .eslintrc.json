@@ -73,6 +73,9 @@
         "quotes": [
             "error",
             "single"
-        ]
+        ],
+        "no-undef": 1,
+        "react/require-default-props": 1,
+        "react/jsx-props-no-spreading": 1
     }
 }
