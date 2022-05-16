@@ -5,7 +5,11 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import brandImage from '@assets/brand.png';
 import {
-  Brand, Container, Content, Title,
+  Brand,
+  Container,
+  Content,
+  ForgotPasswordButton,
+  ForgotPasswordLabel, Title,
 } from './styles';
 
 export function SignIn() {
@@ -28,6 +32,11 @@ export function SignIn() {
             type="secondary"
             secureTextEntry
           />
+          <ForgotPasswordButton>
+            <ForgotPasswordLabel>
+              Esqueci minha senha
+            </ForgotPasswordLabel>
+          </ForgotPasswordButton>
           <Button
             title="Entrar"
             type="secondary"
