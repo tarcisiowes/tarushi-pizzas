@@ -74,9 +74,14 @@
             "error",
             "single"
         ],
-        "no-undef": 1,
+        "no-undef": 0,
         "react/require-default-props": 1,
         "react/jsx-props-no-spreading": 1,
-        "react/jsx-no-constructed-context-values": 1
+        "react/jsx-no-constructed-context-values": 0,
+        "react/jsx-no-bind": 0,
+        "consistent-return": 1,
+        "no-unused-vars": 1,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
     }
 }
