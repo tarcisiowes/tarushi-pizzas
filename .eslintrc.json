@@ -76,6 +76,7 @@
         ],
         "no-undef": 1,
         "react/require-default-props": 1,
-        "react/jsx-props-no-spreading": 1
+        "react/jsx-props-no-spreading": 1,
+        "react/jsx-no-constructed-context-values": 1
     }
 }
