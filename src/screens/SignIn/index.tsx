@@ -19,7 +19,7 @@ export function SignIn() {
   const [password, setPassword] = useState('');
   const { signIn, isLogging } = useAuth();
 
-  function handleSignin() {
+  function handleSignIn() {
     signIn(email, password);
   }
 
@@ -52,7 +52,7 @@ export function SignIn() {
           <Button
             title="Entrar"
             type="secondary"
-            onPress={handleSignin}
+            onPress={handleSignIn}
             isLoading={isLogging}
           />
         </Content>
