@@ -1,4 +1,4 @@
-export default {
+const theme = {
   COLORS: {
     BACKGROUND: '#F7F7F7',
 
@@ -21,11 +21,15 @@ export default {
     SHAPE: '#DCDCDC',
     TITLE: '#FFF',
 
-    GRADIENT: ['#B83341', '#E03F50'],
+    GRADIENT: ['#B83341', '#E03F50'] as const,
   },
 
   FONTS: {
     TITLE: 'DMSerifDisplay_400Regular',
     TEXT: 'DMSans_400Regular',
   },
-};
+} as const;
+
+export type ThemeType = typeof theme;
+
+export default theme;
