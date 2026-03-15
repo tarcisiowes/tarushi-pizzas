@@ -3,24 +3,13 @@
   "compilerOptions": {
     "jsx": "react",
     "strict": true,
-    "noImplicitAny": false,
     "baseUrl": "./",
     "paths": {
-      "@src/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@screens/*": [
-        "./src/screens/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
+      "@src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
-  },
+  }
 }
