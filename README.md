@@ -1,121 +1,124 @@
 # Tarushi Pizzas
 
-Aplicativo mobile para uma pizzaria, construído com **React Native** e **Expo**. O app oferece autenticação de usuários via **Firebase Auth** com persistência de sessão local via **AsyncStorage**, e consulta de perfil de usuário no **Firestore**.
+A mobile application for a pizza shop, built with **React Native** and **Expo**. The app provides user authentication via **Firebase Auth** with local session persistence through **AsyncStorage**, and user profile lookup from **Firestore**.
 
-## Funcionalidades
+## Features
 
-- **Login com e-mail e senha** — Autenticação via Firebase Authentication
-- **Persistência de sessão** — Dados do usuário salvos localmente com AsyncStorage
-- **Consulta de perfil** — Busca dados do usuário (nome, permissão admin) no Firestore
-- **Controle de acesso** — Flag `isAdmin` para diferenciar usuários comuns de administradores
-- **Tela de login** — Interface com gradiente, fontes customizadas (DM Sans, DM Serif Display)
-- **Componentes reutilizáveis** — `Button` e `Input` com variantes de estilo (primary/secondary)
+- **Email & password login** — Authentication via Firebase Authentication
+- **Session persistence** — User data stored locally with AsyncStorage
+- **Profile lookup** — Fetches user data (name, admin permission) from Firestore
+- **Access control** — `isAdmin` flag to differentiate regular users from administrators
+- **Login screen** — Gradient interface with custom fonts (DM Sans, DM Serif Display)
+- **Reusable components** — `Button` and `Input` with style variants (primary/secondary)
 
 ## Tech Stack
 
-| Camada | Tecnologia |
-|--------|------------|
+| Layer | Technology |
+|-------|------------|
 | **Framework** | Expo SDK 45 / React Native 0.68 |
-| **Linguagem** | TypeScript 4.3 |
-| **UI/Estilização** | styled-components 5.3 (native) |
-| **Autenticação** | Firebase Auth (@react-native-firebase/auth) |
-| **Banco de dados** | Cloud Firestore (@react-native-firebase/firestore) |
-| **Armazenamento local** | @react-native-async-storage/async-storage |
-| **Fontes** | @expo-google-fonts (DM Sans, DM Serif Display) |
-| **Navegação** | Não implementada (apenas tela de login) |
-| **Animações** | react-native-reanimated 2.8 |
-| **Gestos** | react-native-gesture-handler 2.2 |
+| **Language** | TypeScript 4.3 |
+| **UI/Styling** | styled-components 5.3 (native) |
+| **Authentication** | Firebase Auth (@react-native-firebase/auth) |
+| **Database** | Cloud Firestore (@react-native-firebase/firestore) |
+| **Local storage** | @react-native-async-storage/async-storage |
+| **Fonts** | @expo-google-fonts (DM Sans, DM Serif Display) |
+| **Navigation** | Not implemented (login screen only) |
+| **Animations** | react-native-reanimated 2.8 |
+| **Gestures** | react-native-gesture-handler 2.2 |
 | **Linting** | ESLint (Airbnb + TypeScript) |
 
-## Estrutura do Projeto
+## Project Structure
 
 ```
 tarushi-pizzas/
-├── App.tsx                          # Ponto de entrada - providers e carregamento de fontes
+├── App.tsx                          # Entry point - providers and font loading
 ├── src/
 │   ├── @types/
-│   │   └── png.d.ts                 # Declaração de tipo para importação de imagens PNG
+│   │   └── png.d.ts                 # Type declaration for PNG image imports
 │   ├── assets/
-│   │   ├── brand.png                # Logo da marca (com variantes @2x e @3x)
-│   │   └── happy.png                # Imagem decorativa (com variantes @2x e @3x)
+│   │   ├── brand.png                # Brand logo (with @2x and @3x variants)
+│   │   └── happy.png                # Decorative image (with @2x and @3x variants)
 │   ├── components/
 │   │   ├── Button/
-│   │   │   ├── index.tsx            # Componente de botão com loading state
-│   │   │   └── styles.ts           # Estilos do botão (primary/secondary)
+│   │   │   ├── index.tsx            # Button component with loading state
+│   │   │   └── styles.ts           # Button styles (primary/secondary)
 │   │   └── Input/
-│   │       ├── index.tsx            # Componente de input customizado
-│   │       └── styles.ts           # Estilos do input (primary/secondary)
+│   │       ├── index.tsx            # Custom input component
+│   │       └── styles.ts           # Input styles (primary/secondary)
 │   ├── hooks/
-│   │   └── auth.tsx                 # Context de autenticação (Firebase + AsyncStorage)
+│   │   └── auth.tsx                 # Authentication context (Firebase + AsyncStorage)
 │   ├── screens/
 │   │   └── SignIn/
-│   │       ├── index.tsx            # Tela de login
-│   │       └── styles.ts           # Estilos da tela de login (gradiente)
+│   │       ├── index.tsx            # Login screen
+│   │       └── styles.ts           # Login screen styles (gradient)
 │   └── theme/
-│       ├── index.ts                 # Definição do tema (cores, fontes)
-│       └── styled.d.ts             # Tipagem do tema para styled-components
-├── assets/                          # Assets padrão do Expo (ícones, splash)
-├── app.json                         # Configuração do Expo
-├── babel.config.js                  # Configuração do Babel (aliases, reanimated)
-├── tsconfig.json                    # Configuração do TypeScript (paths)
-└── .eslintrc.json                   # Configuração do ESLint
+│       ├── index.ts                 # Theme definition (colors, fonts)
+│       └── styled.d.ts             # Theme typing for styled-components
+├── assets/                          # Default Expo assets (icons, splash)
+├── app.json                         # Expo configuration
+├── babel.config.js                  # Babel configuration (aliases, reanimated)
+├── tsconfig.json                    # TypeScript configuration (paths)
+└── .eslintrc.json                   # ESLint configuration
 ```
 
-## Pré-requisitos
+## Prerequisites
 
 - **Node.js** >= 16
-- **Yarn** ou **npm**
+- **Yarn** or **npm**
 - **Expo CLI** (`npm install -g expo-cli`)
-- Projeto Firebase configurado com:
-  - Authentication (Email/Password habilitado)
-  - Cloud Firestore (coleção `users` com campos `name` e `isAdmin`)
-- Arquivos de configuração Firebase:
+- Firebase project configured with:
+  - Authentication (Email/Password enabled)
+  - Cloud Firestore (`users` collection with `name` and `isAdmin` fields)
+- Firebase configuration files:
   - Android: `android/app/google-services.json`
   - iOS: `ios/GoogleService-Info.plist`
 
-## Instalação
+## Installation
 
 ```bash
-# Clonar o repositório
-git clone <url-do-repositorio>
+# Clone the repository
+git clone <repository-url>
 cd tarushi-pizzas
 
-# Instalar dependências
+# Install dependencies
 yarn install
 
-# Iniciar o app
+# Start the app
 yarn start
 
-# Rodar no Android
+# Run on Android
 yarn android
 
-# Rodar no iOS
+# Run on iOS
 yarn ios
 ```
 
-## Configuração do Firebase
+## Firebase Setup
 
-1. Crie um projeto no [Firebase Console](https://console.firebase.google.com/)
-2. Ative **Email/Password** em Authentication > Sign-in method
-3. Crie a coleção `users` no Firestore com a estrutura:
+1. Create a project on the [Firebase Console](https://console.firebase.google.com/)
+2. Enable **Email/Password** under Authentication > Sign-in method
+3. Create the `users` collection in Firestore with the following structure:
    ```json
    {
-     "name": "Nome do Usuário",
+     "name": "User Name",
      "isAdmin": true
    }
    ```
-4. Baixe os arquivos de configuração e coloque nos diretórios nativos
+4. Download the configuration files and place them in the native directories
 
-## Scripts Disponíveis
+## Available Scripts
 
-| Comando | Descrição |
-|---------|-----------|
-| `yarn start` | Inicia o servidor de desenvolvimento Expo |
-| `yarn android` | Inicia no emulador/dispositivo Android |
-| `yarn ios` | Inicia no simulador/dispositivo iOS |
-| `yarn web` | Inicia versão web |
-| `yarn test` | Executa os testes com Jest |
+| Command | Description |
+|---------|-------------|
+| `yarn start` | Starts the Expo development server |
+| `yarn android` | Runs on Android emulator/device |
+| `yarn ios` | Runs on iOS simulator/device |
+| `yarn web` | Runs the web version |
+| `yarn test` | Runs tests with Jest |
+| `yarn test:watch` | Runs tests in watch mode |
+| `yarn test:coverage` | Runs tests with coverage report |
+| `yarn lint` | Runs ESLint on TypeScript files |
 
-## Licença
+## License
 
-Este projeto é privado e não possui licença pública.
+This is a private project with no public license.
