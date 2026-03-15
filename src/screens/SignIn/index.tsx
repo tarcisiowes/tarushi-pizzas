@@ -11,7 +11,8 @@ import {
   Container,
   Content,
   ForgotPasswordButton,
-  ForgotPasswordLabel, Title,
+  ForgotPasswordLabel,
+  Title,
 } from './styles';
 
 export function SignIn() {
@@ -36,13 +37,13 @@ export function SignIn() {
             type="secondary"
             autoCorrect={false}
             autoCapitalize="none"
-            onChange={setEmail}
+            onChangeText={setEmail}
           />
           <Input
             placeholder="Senha"
             type="secondary"
             secureTextEntry
-            onChange={setPassword}
+            onChangeText={setPassword}
           />
           <ForgotPasswordButton>
             <ForgotPasswordLabel>

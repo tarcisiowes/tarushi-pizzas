@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const Container = styled(LinearGradient).attrs(({ theme }) => ({
   colors: theme.COLORS.GRADIENT,
@@ -14,11 +13,11 @@ export const Container = styled(LinearGradient).attrs(({ theme }) => ({
 export const Content = styled.ScrollView.attrs({
   showsVerticalScrollIndicators: false,
   contentContainerStyle: {
-    padding: getBottomSpace() + 48,
+    paddingHorizontal: 32,
+    paddingBottom: 48,
   },
 })`
   width: 100%;
-  padding: 0 32px;
 `;
 
 export const Title = styled.Text`
