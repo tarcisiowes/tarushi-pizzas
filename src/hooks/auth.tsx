@@ -3,98 +3,122 @@ import React, {
   createContext,
   ReactNode,
   useState,
-  useEffect
+  useEffect,
+  useCallback,
 } from 'react';
 import auth from '@react-native-firebase/auth';
-import  firestore  from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-async/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type User = {
+export type User = {
   id: string;
   name: string;
   isAdmin: boolean;
-}
+};
 
 type AuthContextData = {
-  signIn: (email: string, password: string) => Promise<void>
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   isLogging: boolean;
   user: User | null;
-}
+};
 
 type AuthProviderProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
-const USER_COLLECTION = '@tarupizzas:users'
+const USER_COLLECTION = '@tarushi-pizzas:users';
 
-export const AuthContext = createContext({} as AuthContextData);
+const AuthContext = createContext<AuthContextData | undefined>(undefined);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [isLogging, setIsLogging] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
+  const loadUserStorageData = useCallback(async () => {
+    setIsLogging(true);
+    try {
+      const storedUser = await AsyncStorage.getItem(USER_COLLECTION);
+      if (storedUser) {
+        const userData = JSON.parse(storedUser) as User;
+        setUser(userData);
+      }
+    } catch {
+      await AsyncStorage.removeItem(USER_COLLECTION);
+    } finally {
+      setIsLogging(false);
+    }
+  }, []);
+
   useEffect(() => {
-    loadUserStorageData()
-  }, [])
-  
-  async function loadUserStorageData() {
-    setIsLogging(true);
-    const storedUser = await AsyncStorage.getItem(USER_COLLECTION)
+    loadUserStorageData();
+  }, [loadUserStorageData]);
 
-    if (storedUser) {
-      const userData = JSON.parse(storedUser) as User
-      setUser(userData)
-    }
-    setIsLogging(false)
-  }
-
-  async function signIn(email:string, password:string) {
+  async function signIn(email: string, password: string): Promise<void> {
     if (!email || !password) {
-      return Alert.alert('Login', 'Informe o e-mail e senha.');
+      Alert.alert('Login', 'Informe o e-mail e senha.');
+      return;
     }
+
     setIsLogging(true);
 
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(account => {
-        firestore()
-          .collection('users')
-          .doc(account.user.uid)
-          .get()
-          .then(async profile => {
-            const { name, isAdmin } = profile.data() as User;
+    try {
+      const account = await auth().signInWithEmailAndPassword(email, password);
 
-            if (profile.exists) {
-              const userData = {
-                id: account.user.uid,
-                name,
-                isAdmin
-              }
-              await AsyncStorage.setItem(USER_COLLECTION, JSON.stringify(userData))
-              setUser(userData);
-            }
-          })
-        .catch(() => { Alert.alert('Login','Não foi possivel buscar os dados de perfil deste usuário')})
-      })
-      .catch((error: { code: string }) => {
-        const { code } = error;
+      const profile = await firestore()
+        .collection('users')
+        .doc(account.user.uid)
+        .get();
 
-        if (code === 'auth/user-not-found' || code === 'auth/wrong-password') {
-          return Alert.alert('Login', 'E-mail e/ou senha inválida.');
-        }
-        return Alert.alert('Login', 'Não foi possivel realizar o login.');
-      })
-      .finally(() => {
-        setIsLogging(false);
-      });
+      if (!profile.exists) {
+        Alert.alert('Login', 'Perfil de usuário não encontrado.');
+        return;
+      }
+
+      const data = profile.data() as Omit<User, 'id'>;
+      const userData: User = {
+        id: account.user.uid,
+        name: data.name,
+        isAdmin: data.isAdmin,
+      };
+
+      await AsyncStorage.setItem(USER_COLLECTION, JSON.stringify(userData));
+      setUser(userData);
+    } catch (error: unknown) {
+      const firebaseError = error as { code?: string };
+
+      if (
+        firebaseError.code === 'auth/user-not-found'
+        || firebaseError.code === 'auth/wrong-password'
+        || firebaseError.code === 'auth/invalid-credential'
+      ) {
+        Alert.alert('Login', 'E-mail e/ou senha inválida.');
+        return;
+      }
+
+      Alert.alert('Login', 'Não foi possível realizar o login.');
+    } finally {
+      setIsLogging(false);
+    }
   }
-  
+
+  async function signOut(): Promise<void> {
+    try {
+      await auth().signOut();
+      await AsyncStorage.removeItem(USER_COLLECTION);
+      setUser(null);
+    } catch {
+      Alert.alert('Sair', 'Não foi possível sair da conta.');
+    }
+  }
+
   return (
     <AuthContext.Provider value={{
       signIn,
+      signOut,
       isLogging,
-      user
+      user,
     }}
     >
       {children}
@@ -102,10 +126,14 @@ function AuthProvider({ children }: AuthProviderProps) {
   );
 }
 
-function useAuth() {
+function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
 
   return context;
 }
 
-export { AuthProvider, useAuth };
+export { AuthContext, AuthProvider, useAuth };
