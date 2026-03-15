@@ -9,10 +9,10 @@ import {
 } from './styles';
 
 type Props = RectButtonProps & {
-  title: string
-  type?: TypeProps
-  isLoading?: boolean
-}
+  title: string;
+  type?: TypeProps;
+  isLoading?: boolean;
+};
 
 export function Button({
   title,
@@ -21,7 +21,7 @@ export function Button({
   ...rest
 }: Props) {
   return (
-    <Container type={type} enable={!isLoading} {...rest}>
+    <Container type={type} enabled={!isLoading} {...rest}>
       {isLoading ? <Load /> : <Title>{title}</Title>}
     </Container>
   );

@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-export type TypeProps = 'primary'|'secondary'
+export type TypeProps = 'primary' | 'secondary';
 
 type ContainerProps = {
-  type: TypeProps
-}
+  type: TypeProps;
+};
 
 export const Container = styled(RectButton)<ContainerProps>`
   flex: 1;
@@ -24,7 +24,7 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     color: ${theme.COLORS.TITLE};
-    font-family: ${theme.FONTS.TITLE}
+    font-family: ${theme.FONTS.TITLE};
   `}
 `;
 
